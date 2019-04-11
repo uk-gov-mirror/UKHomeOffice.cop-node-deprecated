@@ -65,6 +65,6 @@ RUN yum -y update && \
     yum -y clean all && \
     chown -R "$USER":"$GROUP" "$HOME" /app
 
-USER NODE
+USER "${USER}"
 WORKDIR /app
 CMD [ "node" ]
