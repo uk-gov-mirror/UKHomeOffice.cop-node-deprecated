@@ -14,7 +14,7 @@ RUN yum -y update && \
     mkdir -p /home && \
     groupadd -g 1000 "$GROUP" && \
     adduser -g 1000 -u 1000 -s /bin/false -d "$HOME" "$USER" && \
-    mkdir -p /app  "$HOME/yarn" && \
+    mkdir -p /app  "$HOME/yarn" /drone && \
     echo "prefix = $NPM_PACKAGES" >> "$HOME/.npmrc" && \
     cd /usr/src && \
     for key in \
@@ -63,7 +63,7 @@ RUN yum -y update && \
     rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz && \
     yum -y remove shadow-utils gcc44 gcc-c++ libgcc44 cmake tar gzip make xz && \
     yum -y clean all && \
-    chown -R "$USER":"$GROUP" "$HOME" /app
+    chown -R "$USER":"$GROUP" "$HOME" /app /usr/src /drone
 
 USER "${USER}"
 WORKDIR /app
