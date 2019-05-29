@@ -1,6 +1,7 @@
 kind: pipeline
 name: default
 
+steps:
 - name: image_to_docker_hub
   image: plugins/docker
   settings:
