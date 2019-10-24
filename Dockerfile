@@ -10,7 +10,7 @@ ENV PATH ${HOME}/bin:${NPM_PACKAGES}/bin:$HOME/yarn-v$YARN_VERSION/bin:$PATH
 ENV NODE_PATH $NPM_PACKAGES/lib/node_modules:$NODE_PATH
 
 RUN yum -y update && \
-    yum -y install shadow-utils gcc44 gcc-c++ libgcc44 cmake curl tar gzip make xz && \
+    yum -y install shadow-utils gcc44 gcc-c++ libgcc44 cmake curl tar gzip make xz python2-pip && \
     mkdir -p /home && \
     groupadd -g 1000 "$GROUP" && \
     adduser -g 1000 -u 1000 -s /bin/false -d "$HOME" "$USER" && \
@@ -61,6 +61,7 @@ RUN yum -y update && \
     ln -s $HOME/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn && \
     ln -s $HOME/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg && \
     rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz && \
+    pip install PyPDF2 && \
     yum -y remove shadow-utils gcc44 gcc-c++ libgcc44 cmake tar gzip make xz && \
     yum -y clean all && \
     chown -R "$USER":"$GROUP" "$HOME" /app /usr/src /drone
